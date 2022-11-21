@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:user_save/preferences/preferences.dart';
+import 'package:user_save/provider/theme_provider.dart';
 import 'package:user_save/widgets/widgets.dart';
 
 class ConfigurationPage extends StatefulWidget {
@@ -10,12 +12,43 @@ class ConfigurationPage extends StatefulWidget {
 }
 
 class _ConfigurationPageState extends State<ConfigurationPage> {
+  final imgController = TextEditingController(text: Preferences.img);
+  final nameController = TextEditingController(text: Preferences.name);
+  final lastnameController = TextEditingController(text: Preferences.lastname);
+  final cityController = TextEditingController(text: Preferences.city);
+  final countryController = TextEditingController(text: Preferences.country);
+
+  guardar() {
+    Preferences.img = imgController.text;
+    Preferences.name = nameController.text;
+    Preferences.lastname = lastnameController.text;
+    Preferences.city = cityController.text;
+    Preferences.country = countryController.text;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Configuration Screen'),
+        title: const Text(
+          'Configuration',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
+        actions: [
+          Switch.adaptive(
+            value: Preferences.theme,
+            onChanged: (value) {
+              Preferences.theme = value;
+              final themeProvider =
+                  Provider.of<ThemeProvider>(context, listen: false);
+
+              value ? themeProvider.setOscuro() : themeProvider.setClaro();
+              setState(() {});
+            },
+          )
+        ],
       ),
       drawer: const CustomDrawerWidget(),
       body: Padding(
@@ -24,54 +57,74 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
           child: Column(
             children: [
               CustomTextFieldWidget(
+                controller: imgController,
                 keyBoardType: TextInputType.text,
                 hintTexT: 'Ingresa tu foto',
-                prefixIcon: Icon(Icons.photo),
-                initialValue: Preferences.img,
-                onChanged: (value) {
-                  Preferences.img = value;
-                  setState(() {});
-                },
+                prefixIcon: const Icon(
+                  Icons.photo,
+                  color: Colors.grey,
+                ),
+                //initialValue: Preferences.img,
+                // onChanged: (value) {
+                //   Preferences.img = value;
+                //   setState(() {});
+                // },
               ),
               CustomTextFieldWidget(
+                controller: nameController,
                 keyBoardType: TextInputType.name,
                 hintTexT: 'Ingresa tu nombre',
-                prefixIcon: Icon(Icons.person),
-                initialValue: Preferences.name,
-                onChanged: (value) {
-                  Preferences.name = value;
-                  setState(() {});
-                },
+                prefixIcon: const Icon(
+                  Icons.person,
+                  color: Colors.grey,
+                ),
+                // initialValue: Preferences.name,
+                // onChanged: (value) {
+                //   Preferences.name = value;
+                //   setState(() {});
+                // },
               ),
               CustomTextFieldWidget(
+                controller: lastnameController,
                 keyBoardType: TextInputType.name,
                 hintTexT: 'Ingresa tu apellido',
-                prefixIcon: Icon(Icons.person),
-                initialValue: Preferences.lastname,
-                onChanged: (value) {
-                  Preferences.lastname = value;
-                  setState(() {});
-                },
+                prefixIcon: const Icon(
+                  Icons.person,
+                  color: Colors.grey,
+                ),
+                // initialValue: Preferences.lastname,
+                // onChanged: (value) {
+                //   Preferences.lastname = value;
+                //   setState(() {});
+                // },
               ),
               CustomTextFieldWidget(
+                controller: cityController,
                 keyBoardType: TextInputType.name,
                 hintTexT: 'Ingresa tu ciudad',
-                prefixIcon: Icon(Icons.location_city),
-                initialValue: Preferences.city,
-                onChanged: (value) {
-                  Preferences.city = value;
-                  setState(() {});
-                },
+                prefixIcon: const Icon(
+                  Icons.location_city,
+                  color: Colors.grey,
+                ),
+                // initialValue: Preferences.city,
+                // onChanged: (value) {
+                //   Preferences.city = value;
+                //   setState(() {});
+                // },
               ),
               CustomTextFieldWidget(
+                controller: countryController,
                 keyBoardType: TextInputType.name,
                 hintTexT: 'Ingresa tu país',
-                prefixIcon: Icon(Icons.abc),
-                initialValue: Preferences.country,
-                onChanged: (value) {
-                  Preferences.country = value;
-                  setState(() {});
-                },
+                prefixIcon: const Icon(
+                  Icons.abc,
+                  color: Colors.grey,
+                ),
+                // initialValue: Preferences.country,
+                // onChanged: (value) {
+                //   Preferences.country = value;
+                //   setState(() {});
+                // },
               ),
               RadioListTile(
                 activeColor: Colors.green,
@@ -94,11 +147,17 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
                 },
               ),
               MaterialButton(
-                color: Colors.blue,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                color: Colors.green,
                 onPressed: () {
-                  setState(() {});
+                  guardar();
                 },
-                child: Text('Presionas'),
+                child: const Text(
+                  'SAVE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),

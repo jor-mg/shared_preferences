@@ -9,32 +9,38 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Screen'),
+        title: const Text(
+          'Profile Screen',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       drawer: const CustomDrawerWidget(),
-      body: Column(
-        children: [
-          (Preferences.img == '')
-              ? const CircleAvatar(
-                  radius: 70,
-                  child: Icon(
-                    Icons.photo,
-                    size: 30,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            (Preferences.img == '')
+                ? const CircleAvatar(
+                    radius: 70,
+                    child: Icon(
+                      Icons.photo,
+                      size: 30,
+                    ),
+                  )
+                : CircleAvatar(
+                    radius: 70,
+                    backgroundImage: NetworkImage(Preferences.img),
                   ),
-                )
-              : CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage(Preferences.img),
-                ),
-          Text('Mi nombre es: ${Preferences.name}'),
-          Text('Mi apellido es: ${Preferences.lastname}'),
-          Text('Mi ciudad es: ${Preferences.city}'),
-          Text('Mi país es: ${Preferences.country}'),
-          (Preferences.gender != 1)
-              ? const Text('Genero: femenino')
-              : const Text('Genero: masculino'),
-        ],
+            Text('Mi nombre es: ${Preferences.name}'),
+            Text('Mi apellido es: ${Preferences.lastname}'),
+            Text('Mi ciudad es: ${Preferences.city}'),
+            Text('Mi país es: ${Preferences.country}'),
+            (Preferences.gender != 1)
+                ? const Text('Genero: femenino')
+                : const Text('Genero: masculino'),
+          ],
+        ),
       ),
     );
   }

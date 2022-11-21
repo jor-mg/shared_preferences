@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_save/pages/pages.dart';
+import 'package:user_save/routes/routes.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   const CustomDrawerWidget({
@@ -35,36 +36,41 @@ class CustomDrawerWidget extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Home'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, MyRoutes.rHome);
+
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const HomePage(),
+              //   ),
+              // );
             },
           ),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Configuración'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ConfigurationPage(),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, MyRoutes.rConfiguration);
+
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const ConfigurationPage(),
+              //   ),
+              // );
             },
           ),
           ListTile(
             leading: const Icon(Icons.person),
             title: const Text('Perfil'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProfilePage(),
-                ),
-              );
+              Navigator.pushReplacementNamed(context, MyRoutes.rProfile);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const ProfilePage(),
+              //   ),
+              // );
             },
           ),
         ],

@@ -4,25 +4,31 @@ class CustomTextFieldWidget extends StatelessWidget {
   final TextInputType keyBoardType;
   final String hintTexT;
   final Widget prefixIcon;
-  final String initialValue;
-  final Function(String) onChanged;
+  final TextEditingController? controller;
+  //final String initialValue;
+  //final Function(String) onChanged;
 
   const CustomTextFieldWidget({
     super.key,
     required this.keyBoardType,
     required this.hintTexT,
     required this.prefixIcon,
-    required this.initialValue,
-    required this.onChanged,
+    this.controller,
+    //required this.initialValue,
+    //required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      initialValue: initialValue,
-      onChanged: onChanged,
-      keyboardType: keyBoardType,
-      decoration: InputDecoration(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: TextFormField(
+        //initialValue: initialValue,
+        //onChanged: onChanged,
+        style: const TextStyle(color: Colors.black),
+        controller: controller,
+        keyboardType: keyBoardType,
+        decoration: InputDecoration(
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(
               width: 2,
@@ -38,7 +44,9 @@ class CustomTextFieldWidget extends StatelessWidget {
           filled: true,
           fillColor: Colors.white,
           prefixIcon: prefixIcon,
-          contentPadding: const EdgeInsets.all(18.0)),
+          contentPadding: const EdgeInsets.all(18.0),
+        ),
+      ),
     );
   }
 }

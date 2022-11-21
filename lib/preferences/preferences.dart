@@ -12,6 +12,7 @@ class Preferences {
   static String _number = '';
   static String _email = '';
   static String _role = '';
+  static bool _theme = false;
 
   static Future init() async {
     _prefs = await SharedPreferences.getInstance();
@@ -111,5 +112,15 @@ class Preferences {
   static set role(String role) {
     _role = role;
     _prefs.setString('role', role);
+  }
+
+  //Theme
+  static bool get theme {
+    return _prefs.getBool('theme') ?? _theme;
+  }
+
+  static set theme(bool theme) {
+    _theme = theme;
+    _prefs.setBool('theme', theme);
   }
 }

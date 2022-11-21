@@ -10,12 +10,15 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: const Text(
+          'Home Screen',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       drawer: const CustomDrawerWidget(),
       body: const Center(
-        child: Text('HomePage'),
+        child: Text('Bienvenido'),
       ),
     );
   }
